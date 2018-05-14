@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:intf="http://ws.solutec.esic.fr" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:impl="http://ws.solutec.esic.fr" targetNamespace="http://ws.solutec.esic.fr" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema xmlns="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://ws.solutec.esic.fr">
+      <xsd:element name="addMessage">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="messageWS" type="impl:MessageWS" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:complexType name="MessageWS">
+        <xsd:sequence>
+          <xsd:element name="dateMessage" nillable="true" type="xsd:dateTime" />
+          <xsd:element name="demande" nillable="true" type="xsd:string" />
+          <xsd:element name="destinataire" nillable="true" type="xsd:string" />
+          <xsd:element name="expediteur" nillable="true" type="xsd:string" />
+          <xsd:element name="idMessage" nillable="true" type="xsd:string" />
+          <xsd:element name="recu" type="xsd:boolean" />
+          <xsd:element name="texteMessage" nillable="true" type="xsd:string" />
+          <xsd:element name="xml" nillable="true" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="addMessageResponse">
+        <xsd:complexType />
+      </xsd:element>
+      <xsd:element name="selectAllPS">
+        <xsd:complexType />
+      </xsd:element>
+      <xsd:element name="selectAllPSResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" name="selectAllPSReturn" type="impl:ProfessionnelSanteWS" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:complexType name="ProfessionnelSanteWS">
+        <xsd:sequence>
+          <xsd:element name="adresse" nillable="true" type="xsd:string" />
+          <xsd:element name="categorie" nillable="true" type="xsd:string" />
+          <xsd:element name="fax" nillable="true" type="xsd:string" />
+          <xsd:element name="idPs" nillable="true" type="xsd:string" />
+          <xsd:element name="ins" nillable="true" type="xsd:string" />
+          <xsd:element name="mail" nillable="true" type="xsd:string" />
+          <xsd:element name="mob" nillable="true" type="xsd:string" />
+          <xsd:element name="nom" nillable="true" type="xsd:string" />
+          <xsd:element name="prenom" nillable="true" type="xsd:string" />
+          <xsd:element name="specialite" nillable="true" type="xsd:string" />
+          <xsd:element name="tel" nillable="true" type="xsd:string" />
+          <xsd:element name="ville" nillable="true" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="selectAllbyPS">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="idPs" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="selectAllbyPSResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" name="selectAllbyPSReturn" type="impl:MessageWS" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getPS">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="idPs" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getPSResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="getPSReturn" type="impl:ProfessionnelSanteWS" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="selectAllbyPSRequest">
+    <wsdl:part name="parameters" element="impl:selectAllbyPS" />
+  </wsdl:message>
+  <wsdl:message name="getPSResponse">
+    <wsdl:part name="parameters" element="impl:getPSResponse" />
+  </wsdl:message>
+  <wsdl:message name="selectAllPSRequest">
+    <wsdl:part name="parameters" element="impl:selectAllPS" />
+  </wsdl:message>
+  <wsdl:message name="addMessageResponse">
+    <wsdl:part name="parameters" element="impl:addMessageResponse" />
+  </wsdl:message>
+  <wsdl:message name="addMessageRequest">
+    <wsdl:part name="parameters" element="impl:addMessage" />
+  </wsdl:message>
+  <wsdl:message name="getPSRequest">
+    <wsdl:part name="parameters" element="impl:getPS" />
+  </wsdl:message>
+  <wsdl:message name="selectAllPSResponse">
+    <wsdl:part name="parameters" element="impl:selectAllPSResponse" />
+  </wsdl:message>
+  <wsdl:message name="selectAllbyPSResponse">
+    <wsdl:part name="parameters" element="impl:selectAllbyPSResponse" />
+  </wsdl:message>
+  <wsdl:portType name="Messagerie">
+    <wsdl:operation name="addMessage">
+      <wsdl:input name="addMessageRequest" message="impl:addMessageRequest" />
+      <wsdl:output name="addMessageResponse" message="impl:addMessageResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="selectAllPS">
+      <wsdl:input name="selectAllPSRequest" message="impl:selectAllPSRequest" />
+      <wsdl:output name="selectAllPSResponse" message="impl:selectAllPSResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="selectAllbyPS">
+      <wsdl:input name="selectAllbyPSRequest" message="impl:selectAllbyPSRequest" />
+      <wsdl:output name="selectAllbyPSResponse" message="impl:selectAllbyPSResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getPS">
+      <wsdl:input name="getPSRequest" message="impl:getPSRequest" />
+      <wsdl:output name="getPSResponse" message="impl:getPSResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="MessagerieSoapBinding" type="impl:Messagerie">
+    <wsdlsoap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="addMessage">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="addMessageRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="addMessageResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="selectAllPS">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="selectAllPSRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="selectAllPSResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="selectAllbyPS">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="selectAllbyPSRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="selectAllbyPSResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPS">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getPSRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getPSResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="MessagerieService">
+    <wsdl:port name="Messagerie" binding="impl:MessagerieSoapBinding">
+      <wsdlsoap:address location="http://192.168.1.39:8080/MEDESYS/services/Messagerie" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
